@@ -24,9 +24,13 @@ A Empresa XPTO necessita criar uma API para manter vendas, com as seguintes regr
 9) Deve ser respeitada a seguinte regra de atualização de status:
  
 De: `Aguardando pagamento` Para: `Pagamento Aprovado`
+
 De: `Aguardando pagamento` Para: `Cancelada`
+
 De: `Pagamento Aprovado` Para: `Enviado para Transportadora`
+
 De: `Pagamento Aprovado` Para: `Cancelada`
+
 De: `Enviado para Transportador` Para: `Entregue`
 
 ## ORIENTAÇÕES TÉCNICAS
