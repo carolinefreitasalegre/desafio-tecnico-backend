@@ -1,11 +1,12 @@
 ## INSTRUÇÕES PARA O TESTE TÉCNICO
 
-- Crie um fork deste projeto . É preciso estar logado na sua conta GitHub;
+- Crie um fork deste projeto .
+  É preciso estar logado na sua conta GitHub;
 - Informações importantes sobre processo de commit da solução.
- - Quando você começar, faça um commit vazio com a mensagem "Iniciando o teste de tecnologia" e quando terminar, faça o commit com uma mensagem "Finalizado o teste de tecnologia";
- - Commit após cada ciclo de refatoração pelo menos;
- - Não use branches;
- - Você deve prover evidências suficientes de que sua solução está completa indicando, no mínimo, que ela funciona;
+    - Quando você começar, faça um commit vazio com a mensagem "Iniciando o teste de tecnologia" e quando terminar, faça o commit com uma mensagem "Finalizado o teste de tecnologia";
+    - Commit após cada ciclo de refatoração pelo menos;
+    - Não use branches;
+    - Você deve prover evidências suficientes de que sua solução está completa indicando, no mínimo, que ela funciona;
 
 ## O TESTE
 
