@@ -20,7 +20,7 @@ A Empresa XPTO necessita criar uma API para manter vendas, com as seguintes regr
 6) Deve ser possível obter uma venda através do seu ID;
 7) Deve ser possível incluir novos itens ou remover itens, enquanto a venda ainda estiver com status "Aguardando Pagamento”, observando o item 4;
 8) Deve ser possível atualizar o status de uma venda informando seu ID e algum dos status: 
-  `Pagamento aprovado` | `Enviado para transportadora` | `Entregue` | `Cancelada`;
+  Aguardando pagamento | Pagamento aprovado | Enviado para transportadora | Entregue | Cancelada;
  
 9) Deve ser respeitada a seguinte regra de atualização de status:
  
