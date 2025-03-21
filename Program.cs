@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -16,29 +18,61 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
+
+// Simulação de um banco de dados em memória para vendedores
+var vendedores = new List<Vendedor>
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+    new Vendedor { Id = 1, Cpf = "123.456.789-01", Nome = "João da Silva", Email = "joao@email.com", Telefone = "11 99999-1234" },
+    new Vendedor { Id = 2, Cpf = "987.654.321-09", Nome = "Maria Souza", Email = "maria@email.com", Telefone = "21 98888-5678" }
 };
 
-app.MapGet("/weatherforecast", () =>
+// GET /vendedores
+app.MapGet("/vendedores", () => Results.Ok(vendedores));
+
+// GET /vendedores/{id}
+app.MapGet("/vendedores/{id}", (int id) =>
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+    var vendedor = vendedores.FirstOrDefault(v => v.Id == id);
+    if (vendedor == null)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(vendedor);
+});
+
+// POST /vendedores
+app.MapPost("/vendedores", ([FromBody] Vendedor novoVendedor) =>
+{
+    novoVendedor.Id = vendedores.Max(v => v.Id) + 1;
+    vendedores.Add(novoVendedor);
+    return Results.Created($"/vendedores/{novoVendedor.Id}", novoVendedor);
+});
+
+// PUT /vendedores/{id}
+app.MapPut("/vendedores/{id}", (int id, [FromBody] Vendedor vendedorAtualizado) =>
+{
+    var vendedor = vendedores.FirstOrDefault(v => v.Id == id);
+    if (vendedor == null)
+    {
+        return Results.NotFound();
+    }
+    vendedor.Cpf = vendedorAtualizado.Cpf;
+    vendedor.Nome = vendedorAtualizado.Nome;
+    vendedor.Email = vendedorAtualizado.Email;
+    vendedor.Telefone = vendedorAtualizado.Telefone;
+    return Results.NoContent();
+});
+
+// DELETE /vendedores/{id}
+app.MapDelete("/vendedores/{id}", (int id) =>
+{
+    var vendedor = vendedores.FirstOrDefault(v => v.Id == id);
+    if (vendedor == null)
+    {
+        return Results.NotFound();
+    }
+    vendedores.Remove(vendedor);
+    return Results.NoContent();
+});
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

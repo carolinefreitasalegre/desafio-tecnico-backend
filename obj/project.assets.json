@@ -487,11 +487,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/leonardo/Projetos/ProgrameDeGraca/teste-pratico-web-api/teste-pratico-web-api.csproj",
+      "projectUniqueName": "/home/leonardo/Projetos/ProgrameDeGraca/desafio-tecnico-backend/teste-pratico-web-api.csproj",
       "projectName": "teste-pratico-web-api",
-      "projectPath": "/home/leonardo/Projetos/ProgrameDeGraca/teste-pratico-web-api/teste-pratico-web-api.csproj",
+      "projectPath": "/home/leonardo/Projetos/ProgrameDeGraca/desafio-tecnico-backend/teste-pratico-web-api.csproj",
       "packagesPath": "/home/leonardo/.nuget/packages/",
-      "outputPath": "/home/leonardo/Projetos/ProgrameDeGraca/teste-pratico-web-api/obj/",
+      "outputPath": "/home/leonardo/Projetos/ProgrameDeGraca/desafio-tecnico-backend/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/leonardo/.nuget/NuGet/NuGet.Config"

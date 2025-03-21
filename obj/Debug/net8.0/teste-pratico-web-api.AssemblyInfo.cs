@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("teste-pratico-web-api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b810b26ba7dd8d2a4ba862d521d646679f76893e")]
 [assembly: System.Reflection.AssemblyProductAttribute("teste-pratico-web-api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("teste-pratico-web-api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
