@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="../buildMultiTargeting/teste-pratico-web-api.props" />
-</Project>
