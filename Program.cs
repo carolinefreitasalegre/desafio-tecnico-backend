@@ -24,6 +24,7 @@ var vendedores = new List<Vendedor>
 {
     new Vendedor { Id = 1, Cpf = "123.456.789-01", Nome = "João da Silva", Email = "joao@email.com", Telefone = "11 99999-1234" },
     new Vendedor { Id = 2, Cpf = "987.654.321-09", Nome = "Maria Souza", Email = "maria@email.com", Telefone = "21 98888-5678" }
+    new Vendedor { Id = 3, Cpf = "999.999.999-09", Nome = "Pedro Paulo", Email = "pedro@email.com", Telefone = "21 87874-5678" }
 };
 
 // GET /vendedores
