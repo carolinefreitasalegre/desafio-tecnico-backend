@@ -11,6 +11,7 @@ builder.Services.AddSwaggerGen();
 // Adicione o Fluent Validation aqui
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddScoped<IValidator<Vendedor>, VendedorValidator>();
+builder.Services.AddScoped<IValidator<Cliente>, ClienteValidator>();
 
 var app = builder.Build();
 
@@ -30,6 +31,77 @@ var vendedores = new List<Vendedor>
     new Vendedor { Id = 2, Cpf = "987.654.321-09", Nome = "Maria Souza", Email = "maria@email.com", Telefone = "21 98888-5678" },
     new Vendedor { Id = 3, Cpf = "999.999.999-09", Nome = "Pedro Paulo", Email = "pedro@email.com", Telefone = "21 87874-5678" }
 };
+
+// Simulação de um banco de dados em memória
+var clientes = new List<Cliente>();
+int nextId = 1;
+
+// GET /clientes
+app.MapGet("/clientes", () => Results.Ok(clientes));
+
+// GET /clientes/{id}
+app.MapGet("/clientes/{id}", (int id) =>
+{
+    var cliente = clientes.FirstOrDefault(c => c.Id == id);
+    return cliente is not null ? Results.Ok(cliente) : Results.NotFound();
+});
+
+// POST /clientes
+app.MapPost("/clientes", async (
+    [FromBody] Cliente cliente,
+    IValidator<Cliente> validator
+) =>
+{
+    var validationResult = await validator.ValidateAsync(cliente);
+    if (!validationResult.IsValid)
+    {
+        return Results.BadRequest(validationResult.Errors);
+    }
+
+    cliente.Id = nextId++;
+    clientes.Add(cliente);
+    return Results.Created($"/clientes/{cliente.Id}", cliente);
+});
+
+// PUT /clientes/{id}
+app.MapPut("/clientes/{id}", async (
+    int id,
+    [FromBody] Cliente clienteAtualizado,
+    IValidator<Cliente> validator
+) =>
+{
+    var clienteExistente = clientes.FirstOrDefault(c => c.Id == id);
+    if (clienteExistente is null)
+    {
+        return Results.NotFound();
+    }
+
+    clienteAtualizado.Id = id; // Garante que o ID não seja alterado na atualização
+    var validationResult = await validator.ValidateAsync(clienteAtualizado);
+    if (!validationResult.IsValid)
+    {
+        return Results.BadRequest(validationResult.Errors);
+    }
+
+    var index = clientes.IndexOf(clienteExistente);
+    clientes[index] = clienteAtualizado;
+
+    return Results.NoContent();
+});
+
+// DELETE /clientes/{id}
+app.MapDelete("/clientes/{id}", (int id) =>
+{
+    var cliente = clientes.FirstOrDefault(c => c.Id == id);
+    if (cliente is null)
+    {
+        return Results.NotFound();
+    }
+
+    clientes.Remove(cliente);
+    return Results.NoContent();
+});
+
 
 // GET /vendedores
 app.MapGet("/vendedores", () => Results.Ok(vendedores));
